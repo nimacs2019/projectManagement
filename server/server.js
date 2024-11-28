@@ -6,6 +6,7 @@ const cors = require("cors");
 
 
 const Authrouter = require("./routes/authRoutes");
+const Projectrouter = require("./routes/projectRoutes");
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ app.use(
 
 // Define Routes
 app.use("/", Authrouter);
-
+app.use("/", Projectrouter );
 // Example of a protected route
 const auth = require("./middleware/auth");
 

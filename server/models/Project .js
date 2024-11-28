@@ -1,16 +1,25 @@
 const mongoose = require("mongoose");
 
-const { Schema, model, Types } = mongoose;
+const { Schema, model } = mongoose;
+
+const memberSchema = new Schema(
+    {
+        name: { type: String,  },
+        task: { type: String,  },
+        status: { type: String, enum: ["Pending", "In Progress", "Completed"], default: "Pending" },
+    },
+    { _id: false }
+);
 
 const projectSchema = new Schema(
     {
         id: { type: String, required: true },
         name: { type: String, required: true },
+        stack: { type: String, required: true },
         description: { type: String, required: true },
-        status: { type: String, enum: ["Pending", "In Progress", "Completed"], required: true },
-        tasks: [{ type: Types.ObjectId, ref: "Task" }],
-        teamLeader: { type: Types.ObjectId, ref: "User" },
-        teamMembers: [{ type: Types.ObjectId, ref: "User" }],
+        status: { type: String, enum: ["Pending", "In Progress", "Completed"], default: "Pending" },
+        teamLeader: memberSchema,
+        teamMembers: [memberSchema],
     },
     {
         timestamps: true,

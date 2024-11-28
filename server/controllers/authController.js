@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Register a new user
 exports.register = async (req, res) => {
     const { name, email, password, confirmPassword, role } = req.body;
     console.log(req.body);
@@ -10,7 +9,7 @@ exports.register = async (req, res) => {
     try {
         // Allow registration only for students
         if (role == "") {
-            return res.status(403).json({ message: "Registration is not allowed " });
+            return res.status(403).json({ message: "Registration is not allowed" });
         }
 
         // Check if user already exists
@@ -28,6 +27,8 @@ exports.register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        // Generate a unique userId
+
         // Create new user
         const newUser = new User({
             name,
@@ -38,9 +39,12 @@ exports.register = async (req, res) => {
 
         // Save user to database
         await newUser.save();
-        res.status(201).json({ message: " registered successfully" });
+        res.status(201).json({
+            message: "User registered successfully",
+            name: newUser.name, // Optionally return other user details
+        });
     } catch (error) {
-        console.error(error); // Log the error for debugging
+        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 };
@@ -63,7 +67,7 @@ exports.loginUser = async (req, res) => {
         if (["projectmanager", "teamleader", "teammember"].includes(user.role)) {
             isMatch = await bcrypt.compare(password, user.password);
             console.log(`Comparing password: '${password}' with '${user.password}' => Match: ${isMatch}`);
-        }else {
+        } else {
             return res.status(400).json({ message: "Invalid role or credentials" });
         }
 

@@ -1,8 +1,25 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { fetchProjects } from "../../redux/Slice/projectSlice";
 
 
 const ProjectInfo = () => {
+    const [projectData, setProjectData] = useState([]);
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    const { loading, error, } = useSelector((state) => state.project);
+
+    useEffect(() => {
+        const getdata = async()=>{
+            try {
+                
+            } catch (error) {
+                
+            }
+        }
+    }, []);
     return (
         <div style={{ padding: "20px", color: "#fff", minHeight: "100vh" }}>
             {/* Title Section */}
