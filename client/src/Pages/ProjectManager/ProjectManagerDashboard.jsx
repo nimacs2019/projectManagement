@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const ProjectManagerDashboard = () => {
+    const { role } = useSelector((state) => state.auth);
+    
+
     return (
         <div className="container m-1">
             <div style={{ textAlign: "left" }}>
@@ -18,7 +22,7 @@ const ProjectManagerDashboard = () => {
             <div className="row g-4">
                 <div className="col-md-4">
                     <NavLink
-                        to="/*/projects-info"
+                        to={`/${role}/projects-info`}
                         style={{
                             textDecoration: "none",
                         }}

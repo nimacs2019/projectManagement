@@ -44,6 +44,7 @@ const LoginForm = ({ heading, role }) => {
                 const { token, role } = resultAction.payload;
                 localStorage.setItem("authToken", token);
                 navigate(`/${role}/${role}-dashboard`);
+                console.log(`Navigating to: /${role}/${role}-dashboard`);
                 toast.success("Login successful!");
             } else {
                 toast.error("Login failed! Please check your credentials.");

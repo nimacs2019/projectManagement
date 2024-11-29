@@ -1,13 +1,4 @@
-import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../redux/Slice/authSlice";
-import { toast } from "react-toastify";
-
-const ProjectManagerLayout = () => {
-    const dispatch = useDispatch();
+const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user, role } = useSelector((state) => state.auth);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -51,6 +42,3 @@ const ProjectManagerLayout = () => {
             </div>
         </div>
     );
-};
-
-export default ProjectManagerLayout;

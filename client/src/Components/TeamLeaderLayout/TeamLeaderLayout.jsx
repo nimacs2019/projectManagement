@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/Slice/authSlice";
 import { toast } from "react-toastify";
 
-const ProjectManagerLayout = () => {
+const TeamLeaderLayout = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user, role } = useSelector((state) => state.auth);
@@ -53,4 +53,4 @@ const ProjectManagerLayout = () => {
     );
 };
 
-export default ProjectManagerLayout;
+export default TeamLeaderLayout;
