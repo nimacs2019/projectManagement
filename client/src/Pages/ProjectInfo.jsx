@@ -33,7 +33,7 @@ const ProjectInfo = () => {
     };
 
     const handleCloseDetails = () => {
-        setSelectedProject(null); // Close the project details view
+        setSelectedProject(null); 
     };
 
     const handleEditProject = (projectId) => {
@@ -55,7 +55,7 @@ const ProjectInfo = () => {
         }
     };
 
-    console.log("project data", projectData);
+    // console.log("project data", projectData);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -65,7 +65,7 @@ const ProjectInfo = () => {
 
             <div>
                 {selectedProject ? (
-                    <div style={{ padding: "20px", backgroundColor: "#333", color: "#fff" }}>
+                    <div style={{ padding: "20px", backgroundColor: "#1B1E57", color: "#fff" }}>
                         <h2>Project Details</h2>
                         <p>
                             <strong>Project Name:</strong> {selectedProject.name}

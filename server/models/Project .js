@@ -4,6 +4,7 @@ const { Schema, model } = mongoose;
 
 const memberSchema = new Schema(
     {
+        userId:{ type: String,  },
         name: { type: String,  },
         task: { type: String,  },
         status: { type: String, enum: ["Pending", "In Progress", "Completed"], default: "Pending" },

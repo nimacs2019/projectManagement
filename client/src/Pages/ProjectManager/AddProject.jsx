@@ -21,8 +21,8 @@ const AddProject = () => {
         projectname: "",
         stack: "",
         description: "",
-        teamLeader: { name: "", task: "" },
-        teamMembers: [{ name: "", task: "" }],
+        teamLeader: { name: "", task: "", userId: "" },
+        teamMembers: [{ name: "", task: "", userId: "" }],
     });
 
     const handleInputChange = (e) => {
@@ -224,8 +224,24 @@ const AddProject = () => {
                     >
                         <div className="d-flex justify-content-between">
                             <h4 style={{ color: "#DEDEDE" }}>Add Team Leader</h4>
-                            <CheckCircleIcon style={{ color: "#DEDEDE", fontSize: "35", cursor: "pointer" }} onClick={handleCloseForm} />
+                            <CheckCircleIcon
+                                style={{ color: "#DEDEDE", fontSize: "35", cursor: "pointer" }}
+                                onClick={handleCloseForm}
+                            />
                         </div>
+                        <TextField
+                            label="User ID"
+                            name="userId"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            value={formData.teamLeader.userId}
+                            onChange={handleTeamLeaderChange}
+                            sx={{
+                                input: { color: "#DEDEDE" },
+                                label: { color: "#DEDEDE" },
+                            }}
+                        />
                         <TextField
                             label="Team Leader Name"
                             name="name"
@@ -268,10 +284,26 @@ const AddProject = () => {
                     >
                         <div className="d-flex justify-content-between">
                             <h4 style={{ color: "#DEDEDE" }}>Add Team Members</h4>
-                            <CheckCircleIcon style={{ color: "#DEDEDE", fontSize: "35", cursor: "pointer" }} onClick={handleCloseForm} />
+                            <CheckCircleIcon
+                                style={{ color: "#DEDEDE", fontSize: "35", cursor: "pointer" }}
+                                onClick={handleCloseForm}
+                            />
                         </div>
                         {formData.teamMembers.map((member, index) => (
                             <div key={index}>
+                                <TextField
+                                    label="User ID"
+                                    name="userId"
+                                    variant="outlined"
+                                    fullWidth
+                                    margin="normal"
+                                    value={member.userId}
+                                    onChange={(e) => handleTeamMemberChange(index, e)}
+                                    sx={{
+                                        input: { color: "#DEDEDE" },
+                                        label: { color: "#DEDEDE" },
+                                    }}
+                                />
                                 <TextField
                                     label="Member Name"
                                     name="name"

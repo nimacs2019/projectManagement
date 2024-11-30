@@ -42,7 +42,7 @@ const Sidebar = ({ isSidebarOpen, visibleSections, toggleSection, handleLogout }
                         Projects
                     </NavLink>
                     <NavLink
-                        to={`/projectmanager/view-leaders`}
+                        to={`/projectmanager/view-TL-tasks`}
                         style={({ isActive }) => ({
                             color: isActive ? "#FFFFFF" : "#007bff",
                             textDecoration: "none",

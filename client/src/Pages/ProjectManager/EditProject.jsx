@@ -97,7 +97,7 @@ const EditProject = () => {
                 toast.error("failed! Please check your details.");
             }
         } catch (error) {
-            toast.error("An error occurred during registration."); 
+            toast.error("An error occurred during registration.");
         }
     };
 
@@ -252,6 +252,19 @@ const EditProject = () => {
                                 />
                             </div>
                             <TextField
+                                label="User ID"
+                                name="userId"
+                                variant="outlined"
+                                fullWidth
+                                margin="normal"
+                                value={projectData?.teamLeader.userId}
+                                onChange={handleTeamLeaderChange}
+                                sx={{
+                                    input: { color: "#DEDEDE" },
+                                    label: { color: "#DEDEDE" },
+                                }}
+                            />
+                            <TextField
                                 label="Team Leader Name"
                                 name="name"
                                 variant="outlined"
@@ -300,6 +313,19 @@ const EditProject = () => {
                             </div>
                             {projectData?.teamMembers.map((member, index) => (
                                 <div key={index}>
+                                    <TextField
+                                        label="User ID"
+                                        name="userId"
+                                        variant="outlined"
+                                        fullWidth
+                                        margin="normal"
+                                        value={member.userId}
+                                        onChange={(e) => handleTeamMemberChange(index, e)}
+                                        sx={{
+                                            input: { color: "#DEDEDE" },
+                                            label: { color: "#DEDEDE" },
+                                        }}
+                                    />
                                     <TextField
                                         label="Member Name"
                                         name="name"

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import TeamLeaderLayout from "../Components/TeamLeaderLayout/TeamLeaderLayout";
 import ProjectInfo from "../Pages/ProjectInfo";
+import MyTasks from "../Pages/TeamLeader/MyTasks";
 
 const TeamLeaderRoutes = () => {
     const { role } = useSelector((state) => state.auth);
@@ -17,6 +18,8 @@ const TeamLeaderRoutes = () => {
             <Route path="/" element={<TeamLeaderLayout />}>
                 <Route path="teamleader-dashboard" element={<TeamLeaderDashboard />} />
                 <Route path="projects-info" element={<ProjectInfo />} />
+                <Route path="view-TL-tasks" element={<MyTasks />} />
+
 
             </Route>{" "}
         </Routes>

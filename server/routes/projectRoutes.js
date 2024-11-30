@@ -12,7 +12,7 @@ const Projectrouter = express.Router();
 
 Projectrouter.post("/api/add-project", authenticateToken, addProject);
 Projectrouter.get("/api/projects", getAllProjects);
-Projectrouter.put("/api/projects/:projectId", editProject);
+Projectrouter.put("/api/projects/:projectId?", editProject);
 Projectrouter.delete("/api/projects/:projectId", deleteProject);
 Projectrouter.get("/api/projects/own-projects", authenticateToken, getOwnProjects);
 

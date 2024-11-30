@@ -16,9 +16,20 @@ export const addProject = createAsyncThunk("project/addProject", async (projectD
     }
 });
 
+// fetch all projects
 export const fetchProjects = createAsyncThunk("project/fetchProjects", async (_, { rejectWithValue }) => {
     try {
         const response = await instance.get("/api/projects");
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data || error.message);
+    }
+});
+
+// fetch teamleaders and team members task assigned projects only
+export const assignedProjects = createAsyncThunk("project/assignedProjects", async (_, { rejectWithValue }) => {
+    try {
+        const response = await instance.get("/api/projects/own-projects");
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response?.data || error.message);
@@ -70,6 +81,18 @@ const projectSlice = createSlice({
                 state.project = action.payload;
             })
             .addCase(fetchProjects.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(assignedProjects.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(assignedProjects.fulfilled, (state, action) => {
+                state.loading = false;
+                state.project = action.payload;
+            })
+            .addCase(assignedProjects.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
