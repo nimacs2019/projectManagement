@@ -121,7 +121,7 @@ const ProjectInfo = () => {
                         >
                             <h1 style={{ margin: 0 }}>Project Information</h1>
                             <NavLink
-                                to="/*/add-projects"
+                                to={`/${role}/add-projects`}
                                 style={{
                                     textDecoration: "none",
                                 }}

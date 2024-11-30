@@ -6,6 +6,8 @@ const initialState = {
     user: null,
     loading: false,
     error: null,
+    leaders: [],
+    members: [],
     isAuthenticated: false,
     role: null,
 };
@@ -30,6 +32,27 @@ export const registerUser = createAsyncThunk("auth/registerUser", async (userDat
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response.data);
+    }
+});
+
+export const fetchLeaders = createAsyncThunk("auth/fetchLeaders", async (_, { rejectWithValue }) => {
+    try {
+        const response = await instance.get("/api/leaders");
+        return response.data;
+    } catch (error) {
+        console.error("Fetch Leaders Error:", error.response?.data || error.message);
+        return rejectWithValue(error.response?.data || "Failed to fetch leaders");
+    }
+});
+
+// Fetch Members
+export const fetchMembers = createAsyncThunk("auth/fetchMembers", async (_, { rejectWithValue }) => {
+    try {
+        const response = await instance.get("/api/members");
+        return response.data;
+    } catch (error) {
+        console.error("Fetch Members Error:", error.response?.data || error.message);
+        return rejectWithValue(error.response?.data || "Failed to fetch members");
     }
 });
 
@@ -74,6 +97,33 @@ const authSlice = createSlice({
                 state.user = null;
                 state.role = null;
                 state.isAuthenticated = false;
+            })
+            // Fetch Leaders
+            builder.addCase(fetchLeaders.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            });
+            builder.addCase(fetchLeaders.fulfilled, (state, action) => {
+                state.loading = false;
+                state.leaders = action.payload;
+            });
+            builder.addCase(fetchLeaders.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+
+            // Fetch Members
+            builder.addCase(fetchMembers.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            });
+            builder.addCase(fetchMembers.fulfilled, (state, action) => {
+                state.loading = false;
+                state.members = action.payload;
+            });
+            builder.addCase(fetchMembers.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             });
     },
 });

@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-import { Nav, NavLink } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Nav } from "react-bootstrap";
 
 const Sidebar = ({ isSidebarOpen, visibleSections, toggleSection, handleLogout }) => {
     const { role } = useSelector((state) => state.auth);
@@ -21,12 +22,55 @@ const Sidebar = ({ isSidebarOpen, visibleSections, toggleSection, handleLogout }
                 <h4>
                     Pro<span style={{ color: "#3282F6" }}>Task</span>
                 </h4>
-                <Nav className="flex-column mt-5 p-2">
-                    <NavLink to={`/projectmanager-dashboard`}>Dashboard</NavLink>
-                    <NavLink to={`/projects-info`}>Projects</NavLink>
-                    <NavLink to={`/add-projects`}>Add Project</NavLink>
-                    <NavLink to={`/edit-project/:projectId`}>Edit Project</NavLink>{" "}
-                    <NavLink as="button" onClick={handleLogout} className="logout-link">
+                <Nav className="flex-column mt-5 p-2 ">
+                    <NavLink
+                        to={`/projectmanager/projectmanager-dashboard`}
+                        style={({ isActive }) => ({
+                            color: isActive ? "#FFFFFF" : "#007bff",
+                            textDecoration: "none",
+                            marginBottom: "15px",
+                        })}
+                    >
+                        Dashboard
+                    </NavLink>
+                    <NavLink
+                        to={`/projectmanager/projects-info`}
+                        style={({ isActive }) => ({
+                            color: isActive ? "#FFFFFF" : "#007bff",
+                            textDecoration: "none",
+                            marginBottom: "15px",
+                        })}
+                    >
+                        Projects
+                    </NavLink>
+                    <NavLink
+                        to={`/projectmanager/view-leaders`}
+                        style={({ isActive }) => ({
+                            color: isActive ? "#FFFFFF" : "#007bff",
+                            textDecoration: "none",
+                            marginBottom: "15px",
+                        })}
+                    >
+                        Team Leaders
+                    </NavLink>
+                    <NavLink
+                        to={`/projectmanager/view-members`}
+                        style={({ isActive }) => ({
+                            color: isActive ? "#FFFFFF" : "#007bff",
+                            textDecoration: "none",
+                            marginBottom: "5rem",
+                        })}
+                    >
+                        Team Members
+                    </NavLink>{" "}
+                    <NavLink
+                        to="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleLogout();
+                        }}
+                        style={{ textDecoration: "none", marginBottom: "2rem", cursor: "pointer",fontSize:"20px" }}
+                    >
                         Logout
                     </NavLink>
                 </Nav>

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 const ProjectManagerDashboard = () => {
     const { role } = useSelector((state) => state.auth);
-    
 
     return (
         <div className="container m-1">
@@ -50,46 +49,61 @@ const ProjectManagerDashboard = () => {
 
                 {/* Team Leaders */}
                 <div className="col-md-4">
-                    <div
-                        className="card text-center shadow"
+                    <NavLink
+                        to={`/${role}/view-leaders`}
                         style={{
-                            backgroundColor: "#1B1F59",
-                            padding: "15px",
-                            color: "#FFFFFF",
-                            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "10px",
+                            textDecoration: "none",
                         }}
                     >
-                        <div className="card-body">
-                            <h5 className="card-title">Team Leaders</h5>
-                            <h2 className="card-text">5</h2>
-                            <a href="#team-leaders" className="btn btn-link">
-                                View More
-                            </a>
+                        <div
+                            className="card text-center shadow"
+                            style={{
+                                backgroundColor: "#1B1F59",
+                                padding: "15px",
+                                color: "#FFFFFF",
+                                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                                borderRadius: "10px",
+                            }}
+                        >
+                            <div className="card-body">
+                                <h5 className="card-title">Team Leaders</h5>
+                                <h2 className="card-text">5</h2>
+                                <a href="#team-leaders" className="btn btn-link">
+                                    View More
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
                 </div>
 
                 {/* Team Members */}
+
                 <div className="col-md-4">
-                    <div
-                        className="card text-center shadow"
+                    <NavLink
+                        to={`/${role}/view-members`}
                         style={{
-                            backgroundColor: "#1B1F59",
-                            padding: "15px",
-                            color: "#FFFFFF",
-                            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "10px",
+                            textDecoration: "none",
                         }}
                     >
-                        <div className="card-body">
-                            <h5 className="card-title">Team Members</h5>
-                            <h2 className="card-text">25</h2>
-                            <a href="#team-members" className="btn btn-link">
-                                View More
-                            </a>
+                        <div
+                            className="card text-center shadow"
+                            style={{
+                                backgroundColor: "#1B1F59",
+                                padding: "15px",
+                                color: "#FFFFFF",
+                                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                                borderRadius: "10px",
+                            }}
+                        >
+                            <div className="card-body">
+                                <h5 className="card-title">Team Members</h5>
+                                <h2 className="card-text">25</h2>
+                                <a href="#team-members" className="btn btn-link">
+                                    View More
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
                 </div>
 
                 {/* Pending Tasks */}

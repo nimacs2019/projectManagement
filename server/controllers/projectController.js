@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.addProject = async (req, res) => {
+    console.log(req.user);
+
     try {
         const { projectId, projectname, stack, description, teamLeader, teamMembers } = req.body;
 
@@ -38,13 +40,13 @@ exports.getAllProjects = async (req, res) => {
 
 exports.editProject = async (req, res) => {
     console.log("hellllllo...............");
-    
+
     try {
         const { projectId } = req.params;
         const { projectname, stack, description, teamLeader, teamMembers, status } = req.body;
 
         const updatedProject = await Project.findOneAndUpdate(
-            { _id: projectId }, 
+            { _id: projectId },
             {
                 name: projectname,
                 stack,
@@ -53,7 +55,7 @@ exports.editProject = async (req, res) => {
                 teamMembers,
                 status,
             },
-            { new: true } 
+            { new: true }
         );
 
         if (!updatedProject) {
@@ -83,5 +85,16 @@ exports.deleteProject = async (req, res) => {
     } catch (error) {
         console.error("Error deleting project:", error);
         res.status(500).json({ error: "Error deleting project" });
+    }
+};
+
+exports.getOwnProjects = async (req, res) => {
+    try {
+        const teamLeaderName = req.user.name; 
+        const projects = await Project.find({ 'teamLeader.name': teamLeaderName });
+        res.json(projects);
+    } catch (error) {
+        console.error("Error fetching projects:", error);
+        res.status(500).json({ message: "Server error" });
     }
 };

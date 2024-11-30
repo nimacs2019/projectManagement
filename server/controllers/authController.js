@@ -78,9 +78,40 @@ exports.loginUser = async (req, res) => {
         // Create JWT token
         const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-        res.json({ token, role: user.role });
+        res.json({ token, role: user.role ,name:user.name});
     } catch (error) {
         console.error("Server Error:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+exports.getTeamLeaders = async (req, res) => {
+    try {
+        const teamLeaders = await User.find({ role: "teamleader" });
+
+        if (teamLeaders.length === 0) {
+            return res.status(404).json({ message: "No team leaders found" });
+        }
+
+        res.json(teamLeaders);
+    } catch (error) {
+        console.error("Error fetching team leaders:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+// Get all team members
+exports.getTeamMembers = async (req, res) => {
+    try {
+        const teamMembers = await User.find({ role: "teammember" });
+
+        if (teamMembers.length === 0) {
+            return res.status(404).json({ message: "No team members found" });
+        }
+
+        res.json(teamMembers);
+    } catch (error) {
+        console.error("Error fetching team members:", error);
         res.status(500).json({ message: "Server error" });
     }
 };
