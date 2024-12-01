@@ -2,8 +2,11 @@ import React from "react";
 import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
 
 const Header = ({ isSidebarOpen, toggleSidebar }) => {
+    const { role } = useSelector((state) => state.auth);
+
     return (
         <AppBar
             position="static"
@@ -20,7 +23,9 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Project Management System
                 </Typography>
-                <Button color="inherit">Logout</Button>
+                <Typography variant="body1" sx={{ marginRight: 2 }}>
+                    {role ? ` ${role.toUpperCase()} :  ${localStorage.getItem("userName") || "N/A"}` : "Role: N/A"}
+                </Typography>
             </Toolbar>
         </AppBar>
     );

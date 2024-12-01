@@ -51,16 +51,7 @@ const Sidebar = ({ isSidebarOpen, visibleSections, toggleSection, handleLogout }
                     >
                         My tasks
                     </NavLink>
-                    <NavLink
-                        to={`/projectmanager/view-members`}
-                        style={({ isActive }) => ({
-                            color: isActive ? "#FFFFFF" : "#007bff",
-                            textDecoration: "none",
-                            marginBottom: "5rem",
-                        })}
-                    >
-                        Team Members
-                    </NavLink>{" "}
+                    
                     <NavLink
                         to="#"
                         onClick={(e) => {

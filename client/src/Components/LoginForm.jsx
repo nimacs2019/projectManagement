@@ -41,8 +41,9 @@ const LoginForm = ({ heading, role }) => {
                 })
             );
             if (loginUser.fulfilled.match(resultAction)) {
-                const { token, role } = resultAction.payload;
+                const { token, role ,name} = resultAction.payload;
                 localStorage.setItem("authToken", token);
+                localStorage.setItem("userName", name);
                 navigate(`/${role}/${role}-dashboard`);
                 console.log(`Navigating to: /${role}/${role}-dashboard`);
                 toast.success("Login successful!");

@@ -23,7 +23,7 @@ const Header = ({ isSidebarOpen, toggleSidebar }) => {
                     Project Management System
                 </Typography>
                 <Typography variant="body1" sx={{ marginRight: 2 }}>
-                    {role ? `Role: ${role.toUpperCase()}` : "Role: N/A"}
+                    {role ? ` ${role.toUpperCase()} :  ${localStorage.getItem("userName") || "N/A"}` : "Role: N/A"}
                 </Typography>
             </Toolbar>
         </AppBar>
