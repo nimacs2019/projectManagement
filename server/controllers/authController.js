@@ -74,22 +74,33 @@ exports.loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid password" });
         }
-        console.log("USER",user);
-        
+        console.log("USER", user);
 
         // Create JWT token
         const token = jwt.sign({ userId: user._id, role: user.role, empID: user.userId }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
 
-        console.log("this is my token",token);
-        
+        console.log("this is my token", token);
 
-        res.json({ token, role: user.role, name: user.name ,empID: user.userId});
+        res.json({ token, role: user.role, name: user.name, empID: user.userId });
     } catch (error) {
         console.error("Server Error:", error);
         res.status(500).json({ message: "Server error" });
     }
+};
+
+exports.logoutUser = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(400).json({ message: "Token is missing" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    tokenBlacklist.add(token); // Add the token to the blacklist
+
+    res.status(200).json({ message: "Logged out successfully" });
 };
 
 exports.getTeamLeaders = async (req, res) => {

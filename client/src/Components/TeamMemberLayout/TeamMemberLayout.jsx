@@ -1,4 +1,13 @@
-const dispatch = useDispatch();
+import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../redux/Slice/authSlice";
+import { toast } from "react-toastify";
+
+const TeamMemberLayout = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user, role } = useSelector((state) => state.auth);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -42,3 +51,6 @@ const dispatch = useDispatch();
             </div>
         </div>
     );
+};
+
+export default TeamMemberLayout;

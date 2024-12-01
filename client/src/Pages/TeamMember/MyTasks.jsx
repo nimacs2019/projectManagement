@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { assignedProjects, editProject, updateProjectStatus } from "../../redux/Slice/projectSlice";
 import { Button } from "react-bootstrap";
 import { Box, TextField } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { toast } from "react-toastify";
 
 const MyTasks = () => {
@@ -208,7 +207,7 @@ const MyTasks = () => {
                                 <h3>{project.name}</h3>
                                 <p>{project.description}</p>
                                 <p>Status: {project.status}</p>
-                                <p onClick={() => handleViewProject(project)}>View More</p>
+                                {/* <p onClick={() => handleViewProject(project)}>View More</p> */}
                                 <select
                                     value={project.status || ""}
                                     onChange={(e) => handleStatusChange(project._id, e.target.value)}

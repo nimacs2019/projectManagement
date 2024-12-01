@@ -54,6 +54,35 @@ export const deleteProject = createAsyncThunk("project/deleteProject", async (id
     }
 });
 
+export const updateProjectStatus = createAsyncThunk(
+    "project/updateProjectStatus",
+    async ({ projectId, status }, { rejectWithValue }) => {
+        console.log("Attempting to update project status:", { projectId, status });
+
+        // Validate input parameters
+        if (!projectId || !status) {
+            console.error("Invalid input: Missing projectId or status");
+            return rejectWithValue({ message: "Invalid input: Missing projectId or status" });
+        }
+
+        try {
+            const { data } = await instance.put(`/api/projects/${projectId}/status`, {
+                status, // Only send status in the body
+            });
+
+            console.log("Project status updated successfully:", data);
+            return data; 
+        } catch (error) {
+            console.error("Error updating project status:", error);
+            return rejectWithValue(
+                error.response?.data || { message: "An error occurred while updating project status" }
+            );
+        }
+    }
+);
+
+
+
 const projectSlice = createSlice({
     name: "project",
     initialState,
@@ -120,6 +149,21 @@ const projectSlice = createSlice({
                 state.project = state.project.filter((proj) => proj._id !== action.payload.id);
             })
             .addCase(deleteProject.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(updateProjectStatus.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateProjectStatus.fulfilled, (state, action) => {
+                state.loading = false;
+                const updatedProject = action.payload;
+                state.project = state.project.map((project) =>
+                    project._id === updatedProject._id ? { ...project, status: updatedProject.status } : project
+                );
+            })
+            .addCase(updateProjectStatus.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });
